@@ -1,5 +1,7 @@
 # Random Quote Generator
+
 <p align="center">
-  <img>
+  <img src="app.png">
 </p>
+
 #### Tools used : 
