@@ -84,8 +84,15 @@ hr {
     border-radius: 4px;
 }
 
-button:focus {
-    outline: none;
+.buttons button:focus-visible,
+.twitter-share-button:focus-visible {
+    outline: 3px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+.buttons button:disabled {
+    cursor: wait;
+    opacity: 0.7;
 }
 
 .fa-twitter {
