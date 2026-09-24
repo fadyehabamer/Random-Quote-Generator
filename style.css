@@ -62,6 +62,8 @@ hr {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
     margin-top: 10px;
 }
 
@@ -96,8 +98,18 @@ hr {
     opacity: 0.7;
 }
 
-.fa-x-twitter {
+.fa-x-twitter,
+.fa-copy {
     margin-right: 5px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
 }
 
 /* loader */
