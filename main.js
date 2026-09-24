@@ -13,6 +13,37 @@ let copyResetTimer
 // type.fit no longer sends CORS headers (and only serves 5 quotes),
 // so browsers block the request. DummyJSON is CORS-enabled.
 const QUOTE_API = 'https://dummyjson.com/quotes/random'
+const STORAGE_KEY = 'lastQuote'
+
+const showQuote = (quote, authorName) => {
+    text.innerText = quote
+    author.innerText = authorName
+
+    currentQuoteText = `"${quote}" - ${authorName}`
+    copyBtn.disabled = false
+
+    tweetbtn.href = `https://x.com/intent/post?text=${encodeURIComponent(currentQuoteText)}`
+}
+
+const saveQuote = (quote, authorName) => {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ quote, author: authorName }))
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+const loadSavedQuote = () => {
+    try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY))
+        if (saved && typeof saved.quote === 'string' && saved.quote) {
+            return { quote: saved.quote, author: typeof saved.author === 'string' && saved.author ? saved.author : 'Unknown' }
+        }
+    } catch (err) {
+        console.error(err)
+    }
+    return null
+}
 
 const getQuote = async () => {
     nextBtn.disabled = true
@@ -25,13 +56,8 @@ const getQuote = async () => {
         const quote = item.quote
         const authorName = item.author || 'Unknown'
 
-        text.innerText = quote
-        author.innerText = authorName
-
-        currentQuoteText = `"${quote}" - ${authorName}`
-        copyBtn.disabled = false
-
-        tweetbtn.href = `https://x.com/intent/post?text=${encodeURIComponent(`"${quote}" - ${authorName}`)}`
+        showQuote(quote, authorName)
+        saveQuote(quote, authorName)
     } catch (err) {
         console.error(err)
         text.innerText = "Couldn't load a quote. Please check your connection and try again."
@@ -92,4 +118,10 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault()
     if (!nextBtn.disabled) getQuote()
 })
-getQuote()
+
+const savedQuote = loadSavedQuote()
+if (savedQuote) {
+    showQuote(savedQuote.quote, savedQuote.author)
+} else {
+    getQuote()
+}
