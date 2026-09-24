@@ -4,13 +4,17 @@
   <img src="app.png">
 </p>
 
-A small web app that shows a random inspirational quote and lets you share it on Twitter.
+A small web app that shows a random inspirational quote and lets you copy it or share it on X.
 
 **Live demo:** https://randomquote-app.vercel.app/
 
 ## Features
 - Fetches a random quote on load and on every click of **Next**
-- One-click sharing of the current quote to Twitter
+- Keyboard shortcut: press <kbd>Space</kbd> or <kbd>N</kbd> for the next quote
+- Copy the current quote and its author to the clipboard
+- One-click sharing of the current quote to X
+- Remembers the last quote you saw and shows it again on your next visit
+- Loading screen while the first quote is fetched (a text message replaces the animation when reduced motion is preferred)
 - Friendly message if the quote service can't be reached
 
 ## Tools used : 
