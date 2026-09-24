@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Random quote generator: get an inspiring quote at the click of a button and share it on Twitter.">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <title>Quote Generator</title>
 </head>
 <body>
     <div class="container">
-        <i class="fas fa-quote-left"></i>
-        <h2 class="quote"></h2>
+        <i class="fas fa-quote-left" aria-hidden="true"></i>
+        <h2 class="quote" aria-live="polite"></h2>
         <hr>
         <p class="author"></p>
         <div class="buttons">
-            <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=fady" data-size="large" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i>Tweet</a>
-            <button class="next">Next</button>
+            <a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="large" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter" aria-hidden="true"></i>Tweet</a>
+            <button type="button" class="next" aria-label="Next quote">Next</button>
         </div>
     </div>
     <div class="loader hide">
-        <img src="loader.svg" alt="loader">
+        <img src="loader.svg" alt="Loading">
     </div>
     <script src="main.js"></script>
 </body>

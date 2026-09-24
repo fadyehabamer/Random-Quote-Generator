@@ -3,24 +3,31 @@ const author = document.querySelector('.author')
 const nextBtn =  document.querySelector('.next')
 const tweetbtn = document.querySelector('.twitter-share-button')
 
+// type.fit no longer sends CORS headers (and only serves 5 quotes),
+// so browsers block the request. DummyJSON is CORS-enabled.
+const QUOTE_API = 'https://dummyjson.com/quotes/random'
+
 const getQuote = async () => {
-    const res = await fetch('https://type.fit/api/quotes');
-    const quotes = await res.json()
-    //   console.log(quotes)
-    const num = Math.floor(Math.random() * quotes.length)
-    // console.log(num)
+    nextBtn.disabled = true
+    try {
+        const res = await fetch(QUOTE_API)
+        if (!res.ok) throw new Error(`Request failed with status ${res.status}`)
+        const item = await res.json()
 
-    const item = quotes[num];
-    // console.log(item , num)
-    
-    const quote = item.text
-    const authorName = item.author
+        const quote = item.quote
+        const authorName = item.author || 'Unknown'
 
-    text.innerText = quote
-    author.innerText = authorName
+        text.innerText = quote
+        author.innerText = authorName
 
-    tweetbtn.href = `https://twitter.com/intent/tweet?text=${quote} - ${authorName}`
-
+        tweetbtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(`"${quote}" - ${authorName}`)}`
+    } catch (err) {
+        console.error(err)
+        text.innerText = "Couldn't load a quote. Please check your connection and try again."
+        author.innerText = ''
+    } finally {
+        nextBtn.disabled = false
+    }
 }
 
 nextBtn.addEventListener("click" , getQuote)
