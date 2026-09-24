@@ -20,7 +20,7 @@ const getQuote = async () => {
         text.innerText = quote
         author.innerText = authorName
 
-        tweetbtn.href = `https://twitter.com/intent/tweet?text=${quote} - ${authorName}`
+        tweetbtn.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(`"${quote}" - ${authorName}`)}`
     } catch (err) {
         console.error(err)
         text.innerText = "Couldn't load a quote. Please check your connection and try again."
