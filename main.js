@@ -82,4 +82,14 @@ const copyQuote = async () => {
 
 copyBtn.addEventListener("click", copyQuote)
 nextBtn.addEventListener("click" , getQuote)
+
+document.addEventListener('keydown', (e) => {
+    if (e.repeat || e.ctrlKey || e.metaKey || e.altKey) return
+    if (e.target.closest('a, button, input, textarea, select, [contenteditable]')) return
+    const isSpace = e.code === 'Space' || e.key === ' '
+    const isN = e.key === 'n' || e.key === 'N'
+    if (!isSpace && !isN) return
+    e.preventDefault()
+    if (!nextBtn.disabled) getQuote()
+})
 getQuote()
